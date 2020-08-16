@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game of Life</title>
+    <style>
+        canvas {
+            border-style: solid;
+            border-color: red;
+            border-width: thin;
+        }
+    </style>
+</head>
+<body>
+<div id = "coloringButtons" align = "center">
+    <button id = "mark" onclick = "mark()">Color</button>
+    <button id = "erase" onclick = "erase()">Erase</button>
+    <button id = "start/stop" onclick = "startStop()">Start</button>
+    <button id = "clear" onclick = "clearGrid()">Clear</button>
+</div>
+<canvas id = "mainCanvas"></canvas>
+<script>
+    function resizeCanvas(){
+        let canvas = document.getElementById("mainCanvas");
+        let w = document.documentElement.clientWidth;
+        let h = document.documentElement.clientHeight;
+        canvas.setAttribute("width", w.toString());
+        canvas.setAttribute("height", h.toString());
+    }
+    resizeCanvas();
+
+</script>
+<script src = "coloring.js"></script>
+<script src = "cell.js"></script>
+<script src = "index.js"></script>
+
+</body>
+</html>
