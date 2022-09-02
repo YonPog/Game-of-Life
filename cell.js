@@ -12,11 +12,13 @@ class Cell{
     render(ctx){
         let x = Cell.cellSize * this.posX;
         let y = Cell.cellSize * this.posY;
-        ctx.clearRect(x, y, Cell.cellSize, Cell.cellSize);
+        // ctx.clearRect(x, y, Cell.cellSize, Cell.cellSize);
         ctx.beginPath();
         ctx.rect(x, y, Cell.cellSize, Cell.cellSize);
+        ctx.strokeStyle = 'grey';
         ctx.fillStyle = this.alive ? Cell.livingColor : "#FFFFFF";
         ctx.fill();
+        ctx.stroke();
         ctx.closePath();
     }
 

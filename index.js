@@ -4,10 +4,10 @@ let ctx = mainCanvas.getContext("2d");
 let grid = [];
 let running = false;
 let interval;
+let speed = document.getElementById("speed").value
 
 function main(){
     init();
-    setInterval(renderGrid, 10);
     coloring();
 }
 
@@ -19,13 +19,21 @@ function init() {
         let row = [];
         for (let j = 0; j < gridHeight; j++) {
             row.push(new Cell(i, j, false));
+            let x = i * Cell.cellSize;
+            let y = j * Cell.cellSize;
+            ctx.beginPath();
+            ctx.rect(x, y, Cell.cellSize, Cell.cellSize);
+            ctx.strokeStyle = 'grey';
+            ctx.stroke();
         }
         grid.push(row);
     }
+
 }
 
 function generateNext(){
     Cell.nextGen(grid);
+    renderGrid();
 }
 
 function startStop(){
@@ -38,10 +46,17 @@ function startStop(){
         running = true;
         let startButton = document.getElementById("start/stop");
         startButton.innerText = "Stop";
-        interval = setInterval(generateNext, 1000);
+        interval = setInterval(generateNext, 1000 / speed);
     }
 
 }
+
+document.getElementById("speed").oninput = function() {
+    if (!running) return;
+    clearInterval(interval);
+    speed = this.value;
+    interval = setInterval(generateNext, 1000 / speed);
+};
 
 function clearGrid(){
     if (!running){
@@ -49,6 +64,7 @@ function clearGrid(){
             c.alive = false;
         }
     }
+    renderGrid();
 }
 
 function renderGrid(){

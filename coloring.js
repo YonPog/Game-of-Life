@@ -20,6 +20,7 @@ function coloring(){
 
             if (marking !== null){
                 grid[posX][posY].alive = marking;
+                grid[posX][posY].render(ctx);
             }
         }
     }
